@@ -1,0 +1,54 @@
+1 create VENV  :  python -m venv AGEnv 
+2 activate env :  AGEnv\Scripts\activate
+
+=================================================================
+
+mysql : 'NAME': 'rootuser',  # DB name
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'USER': 'root',   # user name<check at home 
+        'PASSWORD': 'ldSO3t$O3L4Q',
+
+=================================================================
+
+super user : userName : superUser 
+                email : superUser@email.com
+                pw : superUser
+
+==================================================================
+link react and django
+======================
+# https://blog.logrocket.com/using-react-django-create-app-tutorial/
+
+for DRF : pip install django djangorestframework django-cors-headers
+
+====================================
+to createDB
+=============
+CREATE DATABASE rootUser;
+use rootUser;
+SELECT `aggapp_student`.`id`,
+    `aggapp_student`.`name`,
+    `aggapp_student`.`email`,
+    `aggapp_student`.`document`,
+    `aggapp_student`.`phone`,
+    `aggapp_student`.`registrationDate`
+FROM `rootuser`.`aggapp_student`;
+
+===================================
+in settings.py file 
+===================
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'rootuser',  # DB name
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'USER': 'root',   # user name<check at home 
+        'PASSWORD': 'ldSO3t$O3L4Q',
+    }
+}
+
+
+
+        

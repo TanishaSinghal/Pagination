@@ -1,0 +1,39 @@
+calling API, 
+
+1) without Axios : 
+
+const [allData,setAllData] = useState([])
+
+const API = 'http://127.0.0.1:8000/api/students/'
+
+const fetchPost = () => { 
+
+        fetch(API).then(res => { 
+
+             console.log("response",res) 
+
+             setAllData(res) 
+
+   })}  
+
+useEffect( () => { fetchPost() },[])
+
+2) with Axios :
+
+const [allData,setAllData] = useState([])
+
+const API = 'http://127.0.0.1:8000/api/students/'
+
+useEffect( () => { 
+
+     async function fetchPost(){        
+
+        const {data} = await axios.get(API)         
+
+        setAllData(data)     
+
+      }     
+
+},[])
+
+==============================================================================

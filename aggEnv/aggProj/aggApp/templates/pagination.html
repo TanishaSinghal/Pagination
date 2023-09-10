@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="{% static 'pagination.css' %}" type='text/css'> 
+    {% comment %} <script src="{% static "js/jquery-1.11.1.js" %}"></script>
+    <script src="{% static "js/rango-jquery.js" %}"></script> {% endcomment %}
+    <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" ></script>
+   
+
+<body>
+
+Total_records: {{total_records}} <br><br>
+number of pages: {{number_of_pages}} <br><br>
+number of slots: {{number_of_slots}} <br><br>
+current page: {{ current_page }} <br><br>
+current slot: {{ current_slot }} <br><br>
+
+{% comment %} <label for="search" name="search">search: </label>
+<input  type="search" name="search" value="{{search}}" onchange="submit()"/> {% endcomment %}
+
+{% comment %} <form method="get" for="search" action="?page={{current_page}}&sort={{sort}}&dir={{dir}}&search={{search}}">
+    <div>
+        <label for="search" name="search">search: </label>
+        <input type="text" id="search" name="search" value="{{search}}" onchange="submit()"/>
+    </div>
+</form>  {% endcomment %}
+
+{% comment %} {{search}} {% endcomment %}
+<br>
+<table  style="border:groove">  
+    <thead>
+        <tr>
+            <th>{% if dir == "None" %}<a href="?page={{current_page}}&sort=name&dir=ascending">Name -</a>{% elif dir == "ascending"%}<a href="?page={{current_page}}&sort=name&dir=descending">Name ↑</a>{% else%}<a href="?page={{current_page}}&sort=name&dir=None">Name ↓</a>{% endif %}</th>
+            {% comment %} <th>Name</th> {% endcomment %}
+
+            {% comment %} <li>
+                <a href='{% if prev != None %} ?page={{prev}} {% else %} ?page="#" {% endif %}'>prev slot</a>
+            </li><br>  {% endcomment %}
+
+            <th><a href="?page={{current_page}}&sort=email&{% if dir == "None" %}dir=ascending{% elif dir == "ascending" %}dir=descending{%else%}dir=None{% endif %}">Email</a></th>
+            <th><a href="?page={{current_page}}&sort=document&{% if dir == "None" %}dir=ascending{% elif dir == "ascending" %}dir=descending{%else%}dir=None{% endif %}">Document</a></th>
+            <th><a href="?page={{current_page}}&sort=registrationDate&{% if dir == "None" %}dir=ascending{% elif dir == "ascending" %}dir=descending{%else%}dir=None{% endif %}">Registration Date</a></th>
+        </tr>
+    </thead>                  
+    <tbody>
+        {% for x in all_page_data %}
+            <tr>
+                <td> {{ x.name }} </td>
+                <td>{{ x.email }}</td>
+                <td> {{ x.document }}</td>
+                <td> {{ x.registrationDate }}</td>
+                {% comment %} <td><a href="/update/{{ x.id }}">update</a>/<a href="/delete/{{ x.id }}">delete</a></td>  {% endcomment %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table><br>
+number of pages per slot : {{ pages_in_slot }} <br><br>
+sort direction : {{ dir }} <br><br>
+
+
+{% comment %} <button><a href="?page={{current_page}}+&sort={{sort}}&dir=ascending">ascending</a></button>
+<button><a href="?page={{current_page}}+&sort={{sort}}&dir=descending ">descending</a></button> {% endcomment %}
+
+
+<ul style="list-style-type: none" class="page_list">
+
+    <li>
+        <a href='?page=1&sort={{sort}}&dir={{dir}}' >first page</a>
+    </li>
+
+    {% comment %} <li>
+        <a href='{% if prev != None %} ?page={{prev}} {% else %} ?page="#" {% endif %}'>prev slot</a>
+    </li><br> {% endcomment %}
+
+    <li>
+        {% if prev != None %}
+            <a href='?page={{prev}}&sort={{sort}}&dir={{dir}}'> <- prev slot</a>
+        {% else %}
+            <a href='?page=1&sort={{sort}}&dir={{dir}}' style="color:gray" class="prev_slot" value={{prev}}> prev slot</a>
+            {% comment %} <span class="prev_span">prev slot does not exist</span>             {% endcomment %}
+        {% endif %}
+    </li>
+
+    <li>
+        {% for i in number_of_pages_loop %}
+            {% if i == current_page  %} 
+                <a href='?page={{i}}&sort={{sort}}&dir={{dir}}' style="color:white;background-color : green">{{i}}</a> 
+            {% else %} 
+                <a href='?page={{i}}&sort={{sort}}&dir={{dir}}' style="color:blue">{{i}}</a>
+            {% endif %}
+            {% comment %} <a href='?page={{i}}'>{{i}}</a> {% endcomment %}
+        {% endfor %}
+
+        {% comment %} <br><br> {% endcomment %}
+
+        {% comment %} current page: {{ current_page }} <br><br>
+        current slot: {{ current_slot }} <br><br> {% endcomment %}
+    </li>
+
+    {% comment %} <li>
+        <a href='{% if next != None %} ?page={{next}} {% else %} ?page="#" {% endif %}'>next slot</a>
+    </li> {% endcomment %}
+
+    <li>
+        {% if next != None %}
+            <a href='?page={{next}}&sort={{sort}}&dir={{dir}}'>next slot -></a>
+        {% else %}
+            <a href='?page={{ number_of_pages }}&sort={{sort}}&dir={{dir}}' style="color:gray" class="next_slot" value={{next}}> next slot</a>
+            {% comment %} <span class="next_span">next slot does not exist</span> {% endcomment %}
+        {% endif %}
+    </li>
+
+    <li>
+        <a href='?page={{number_of_pages}}&sort={{sort}}&dir={{dir}}' >Last page</a>
+    </li>
+</ul>
+
+
+
+
+
+{% if prev == None %} <div class="slot_span"> <b>{{message}}</b> </div> <br> {% elif next == None %} <div class="slot_span"> <b>{{message}}</b> </div> <br>{% else %} <div class="slot_span" none></div>{% endif %} 
+
+{% comment %} {% if next == None or prev == None %}
+    <div >Page not available</div>
+{% endif %} {% endcomment %}
+
+{% if next != None %}
+    
+{% endif %}
+
+
+{% comment %} {{hello}} {% endcomment %}
+
+</body>
+</html>     

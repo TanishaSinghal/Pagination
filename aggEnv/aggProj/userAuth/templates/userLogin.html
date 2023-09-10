@@ -1,0 +1,44 @@
+{% comment %} {% load static %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+{% comment %} {% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %} {% endcomment %}
+<style>
+    {% comment %} .errorlist { margin-bottom: -10px } {% endcomment %}
+</style>
+{% comment %} <script src="{% static 'form.js' %}"></script> {% endcomment %}
+<body>
+    <h2>Login Form</h2>
+    <form action="" method="post" name="demoForm" id="demoForm">
+        {% csrf_token %}
+        <div class="m-4">
+            <label for="email" name="email" id="email">Email: </label>
+            {% comment %} <input type="text" id="email" value = {{form.email}}/> {% endcomment %}
+            {{form.email}}
+            {% comment %} {{ ip_email }} {% endcomment %}
+
+        </div>
+        <div class="m-4">
+            <label for="password" name="password" id="password">Password: </label>
+            {% comment %} <input type="password" id="password" value={{form.password}}/> {% endcomment %}
+            {{form.password}}
+        </div>
+
+        {{message}}
+        
+       
+        {% comment %} Name : {{ form.name }} 
+        Email : {{ form.email }}
+        Password : {{ form.password }}
+        Gender : {{ form.gender }}  {% endcomment %}
+          
+        
+        <div class="m-4">
+            <button  type="submit"> Login </button>
+        </div>
+    </form>
+    <p class="text-center">Don't have an account? <a href="/userRegistration">Create an account</a>.</p>
+</body>
+
+</html>
